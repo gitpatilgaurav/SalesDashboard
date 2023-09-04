@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import {getDataAction}  from "./action/Action";
+import HomePage from "./components/Homepage/HomePage";
 
 function App() {
+  const dispatch = useDispatch();
+  const apiData = useSelector(state=>state.ApiReducer);
+  console.log(apiData)
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+
+    const res = await fetch("http://localhost:8000/data");
+    const data = await res.json();
+    // console.log(data)
+    dispatch(getDataAction(data))
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HomePage />
     </div>
   );
 }
 
 export default App;
+
+
