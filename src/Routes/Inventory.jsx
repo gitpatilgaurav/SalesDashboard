@@ -10,14 +10,6 @@ export default function Inventory() {
 
   const apiData = useSelector((state) => state.ApiReducer);
 
-  const totalCost = apiData.reduce((cost, item) => cost + item.cost, 0);
-  const totalRevenue = apiData.reduce(
-    (revenue, item) => revenue + item.revenue,
-    0
-  );
-  const totalprofit = totalRevenue - totalCost;
-  const profitPercentage = ((totalprofit / totalRevenue) * 100).toFixed(2);
-
   const categoryGroup = _.groupBy(apiData, "product_category");
   const subCategoryGroup = _.groupBy(apiData, "sub_category");
 
@@ -39,7 +31,7 @@ export default function Inventory() {
           chartName={<ProductPie/>}
         />
         <Chart
-          title="Wich is Most Demamded Product?"
+          title="Which Products Brings Most Sales?"
           chartName={<SubProductPie />}
         />
       </div>

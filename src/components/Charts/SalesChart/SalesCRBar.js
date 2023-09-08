@@ -71,7 +71,6 @@ export default function SalesCrBar() {
     );
     xAxis.data.setAll(sortedMonths);
 
-    // Create series for revenue by month
     let series1 = chart.series.push(
       am5xy.ColumnSeries.new(root, {
         name: "Revenue",
@@ -98,7 +97,6 @@ export default function SalesCrBar() {
     series2.set("fill", am5.color("#ff6347"));
     series2.columns.template.set("tooltipText", "{categoryX}: ${valueY}");
 
-    // Add legend
     let legend = chart.children.push(am5.Legend.new(root, {}));
     legend.data.setAll(chart.series.values);
     series1.appear(2000);

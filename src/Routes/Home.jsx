@@ -4,12 +4,9 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import HomeGenderPie from "../components/Charts/HomeChart/HomeGenderPie";
 import HomeCountryBar from "../components/Charts/HomeChart/HomeCountryBar";
 import KPI from "./UiComponents/KPI";
-import Chart from "./UiComponents/Charts"
-import HomeGeoChart from "../components/Charts/HomeChart/HomeGeoChart";
-
+import Chart from "./UiComponents/Charts";
 
 export default function Home() {
-
   const apiData = useSelector((state) => state.ApiReducer);
 
   const total_Transaction = apiData.length;
@@ -35,14 +32,20 @@ export default function Home() {
     <div className="home">
       <div className="home-container">
         <div className="kpi">
-        <KPI title="Total Countries" value={total_countries} />
+          <KPI title="Total Countries" value={total_countries} />
           <KPI title="Total Sales" value={total_Transaction} />
           <KPI title="Total Cash Flow" value={`$ ${total_cost}`} />
           <KPI title="Total Profit" value={`$ ${total_profit}`} />
         </div>
         <div className="charts">
-          <Chart title="Sales by Gender: Who's Driving the Revenue Growth?" chartName={<HomeGenderPie/>}/>
-          <Chart title="Which Country Dominates Sales?" chartName={<HomeCountryBar/>}/>
+          <Chart
+            title="Sales by Gender: Who's Driving the Revenue Growth?"
+            chartName={<HomeGenderPie />}
+          />
+          <Chart
+            title="Which Country Dominates Sales?"
+            chartName={<HomeCountryBar />}
+          />
         </div>
       </div>
     </div>

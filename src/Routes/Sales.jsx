@@ -16,7 +16,7 @@ export default function Sales() {
   );
   const totalprofit = totalRevenue - totalCost;
   const profitPercentage = ((totalprofit / totalRevenue) * 100).toFixed(2);
-
+  const totalQuantity = apiData.reduce((quan, item) => quan + item.quantity, 0);
   const categoryGroup = _.groupBy(apiData, "product_category");
   const subCategoryGroup = _.groupBy(apiData, "sub_category");
 
@@ -33,8 +33,6 @@ export default function Sales() {
       return categoryGroup[category].length;
     }
   );
-
-  const totalQuantity = apiData.reduce((quan, item) => quan + item.quantity, 0);
 
   return (
     <div className="home">

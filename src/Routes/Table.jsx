@@ -16,7 +16,6 @@ export default function Table() {
       if (col === "date") {
         const dateA = new Date(a[col]);
         const dateB = new Date(b[col]);
-
         if (order === "ASC") {
           return dateA - dateB;
         } else {
