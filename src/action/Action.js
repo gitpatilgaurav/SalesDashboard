@@ -1,4 +1,4 @@
-export const getDataAction = data=>{
+export const getDataAction = data =>{
 return {
 type : 'GET_DATA',
 payload: data,

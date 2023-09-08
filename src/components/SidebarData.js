@@ -12,6 +12,18 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
+    title: "Sales",
+    path: "/sales",
+    icon: <FaIcons.FaMoneyBillAlt />,
+    cName: "nav-text",
+  },
+  {
+    title: "Inventory",
+    path: "/inventory",
+    icon: <MdIcons.MdInventory />,
+    cName: "nav-text",
+  },
+  {
     title: "Table",
     path: "/Table",
     icon: <FaIcons.FaTable />,
@@ -23,18 +35,7 @@ export const SidebarData = [
     icon: <FaIcons.FaWpforms />,
     cName: "nav-text",
   },
-  {
-    title: "Sales",
-    path: "/sales",
-    icon: <FaIcons.FaMoneyBillAlt />,
-    cName: "nav-text",
-  },
-  {
-    title: "Inventory",
-    path: "/iventory",
-    icon: <MdIcons.MdInventory />,
-    cName: "nav-text",
-  },
+
   {
     title: "About US",
     path: "/aboutus",

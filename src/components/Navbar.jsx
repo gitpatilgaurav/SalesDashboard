@@ -6,16 +6,17 @@ import { SidebarData } from "./SidebarData";
 import "../App.css";
 
 export default function Navbar() {
-  const [sidebar, setSidebar] = useState(false);
 
+  const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
   return (
     <div>
       <div className="navbar">
         <Link to="#" className="menu-bars">
           <FaIcons.FaBars onClick={showSidebar} />
         </Link>
-        <h3>DataViz</h3>
+        <h3>IKEA Sales</h3>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showSidebar}>

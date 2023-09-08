@@ -1,55 +1,80 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import TableRows from "./TableComponents/TableRows";
+import TableHeaders from "./TableComponents/TableHeaders";
 
 export default function Table() {
   const apiData = useSelector((state) => state.ApiReducer);
+
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const itemsPerPage = 10;
-  const pagesToShow = 10;
-  function TableRows() {
-    return apiData
-      .filter((data) => {
-        if (search === "") {
-          return true;
+  const [order, setOrder] = useState("ASC");
+
+  function onSorting(col) {
+    setOrder(order === "ASC" ? "DESC" : "ASC");
+    const sorted = [...apiData].sort((a, b) => {
+      if (col === "date") {
+        const dateA = new Date(a[col]);
+        const dateB = new Date(b[col]);
+
+        if (order === "ASC") {
+          return dateA - dateB;
+        } else {
+          return dateB - dateA;
         }
-        const searchTerm = search.toLowerCase().trim();
-        for (const key in data) {
-          if (
-            data[key] &&
-            data[key].toString().toLowerCase().includes(searchTerm)
-          ) {
-            return true;
-          }
+      } else if (col === "month") {
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+
+        if (order === "ASC") {
+          return monthNames.indexOf(a[col]) - monthNames.indexOf(b[col]);
+        } else {
+          return monthNames.indexOf(b[col]) - monthNames.indexOf(a[col]);
         }
-        return false;
-      })
-      .slice((page - 1) * itemsPerPage, page * itemsPerPage)
-      .map((data, index) => (
-        <tr key={index}>
-          <td>{data.index}</td>
-          <td>{data.date}</td>
-          <td>{data.year}</td>
-          <td>{data.month}</td>
-          <td>{data.customer_age}</td>
-          <td>{data.customer_gender}</td>
-          <td>{data.country}</td>
-          <td>{data.state}</td>
-          <td>{data.product_category}</td>
-          <td>{data.sub_category}</td>
-          <td>{data.quantity}</td>
-          <td>{data.unit_cost}</td>
-          <td>{data.unit_price}</td>
-          <td>{data.cost}</td>
-          <td>{data.revenue}</td>
-        </tr>
-      ));
+      } else if (typeof a[col] === "string" && typeof b[col] === "string") {
+        const strA = a[col].toLowerCase();
+        const strB = b[col].toLowerCase();
+
+        if (order === "ASC") {
+          if (strA < strB) return -1;
+          if (strA > strB) return 1;
+          return 0;
+        } else {
+          if (strA > strB) return -1;
+          if (strA < strB) return 1;
+          return 0;
+        }
+      } else {
+        if (order === "ASC") {
+          return a[col] - b[col];
+        } else {
+          return b[col] - a[col];
+        }
+      }
+    });
+
+    apiData.length = 0;
+    apiData.push(...sorted);
   }
 
   function onSearchHandeler(e) {
     setSearch(e.target.value);
-    console.log(search);
   }
+
+  const itemsPerPage = 10;
+  const pagesToShow = 10;
 
   const totalPages = Math.ceil(apiData.length / itemsPerPage);
 
@@ -58,12 +83,15 @@ export default function Table() {
       setPage(newPage);
     }
   };
+
   function handleNextPage() {
     handlePageChange(page + 1);
   }
+
   function handlePrevPage() {
     handlePageChange(page - 1);
   }
+
   function onPageNumber(newPage) {
     return function () {
       handlePageChange(newPage);
@@ -80,8 +108,6 @@ export default function Table() {
           <div className="input">
             <input
               type="text"
-              name=""
-              id=""
               className="input"
               placeholder="Type to search"
               onChange={onSearchHandeler}
@@ -89,26 +115,15 @@ export default function Table() {
           </div>
           <table className="table table-bordered">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Year</th>
-                <th>Month</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>Product Category</th>
-                <th>Sub Category</th>
-                <th>Quantity</th>
-                <th>Unit Cost</th>
-                <th>Unit Price</th>
-                <th>Cost</th>
-                <th>Revenue</th>
-              </tr>
+              <TableHeaders onSorting={onSorting} />
             </thead>
             <tbody>
-              <TableRows />
+              <TableRows
+                apiData={apiData}
+                search={search}
+                page={page}
+                itemsPerPage={itemsPerPage}
+              />
             </tbody>
           </table>
           {apiData.length > 0 && (
@@ -119,7 +134,7 @@ export default function Table() {
               >
                 ◀
               </span>
-              {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
+              {Array.from({ length: endPage - startPage + 1 }, (index, i) => (
                 <span
                   key={i}
                   onClick={onPageNumber(startPage + i)}
