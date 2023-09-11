@@ -5,8 +5,10 @@ import DateInput from "./FormComponents/DateInput";
 import SelectInput from "./FormComponents/SelectInput";
 import SuccessMessage from "./FormComponents/SuccessMessage";
 import ResetForm from "./FormComponents/ResetForm";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 export default function Form() {
+  const apiData = useSelector((state) => state.ApiReducer);
   const [productCategory, setProductCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [unitPrice, setUnitPrice] = useState("");
@@ -19,7 +21,9 @@ export default function Form() {
   const [state, setState] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
-
+  const [year, setYear] = useState(""); 
+const [month, setMonth] = useState(""); 
+console.log(year)
   const [productCategoryError, setProductCategoryError] = useState("");
   const [subCategoryError, setSubCategoryError] = useState("");
   const [unitPriceError, setUnitPriceError] = useState("");
@@ -78,12 +82,30 @@ export default function Form() {
   }
 
   function onDateChange(event) {
-    const { value } = event.target;
-    if (value) {
-      setDate(value);
+    const selectedDate = new Date(event.target.value);
+  
+    if (!isNaN(selectedDate.getTime())) {
+
+      const year = selectedDate.getFullYear();
+  
+     
+      const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+  
+   
+      const month = monthNames[selectedDate.getMonth()];
+  
+      setDate(event.target.value);
       setDateError("");
+      setYear(year.toString());
+      setMonth(month); 
+    } else {
+      setDateError("Invalid date format.");
     }
   }
+  
 
   function onQuantityChange(event) {
     const { value, error } = validateNumericInput(event.target.value);
@@ -214,20 +236,27 @@ export default function Form() {
     }
 
     if (isValid) {
+    
+
       const formData = {
-        productCategory,
-        subCategory,
-        unitPrice: parseFloat(unitPrice),
-        unitCost: parseFloat(unitCost),
+        index: apiData.length + 1,
         date,
-        quantity: parseInt(quantity),
+        year,
+        month,
         age: parseInt(age),
         gender,
         country,
         state,
+        productCategory,
+        subCategory,
+        quantity: parseInt(quantity),
+        unitCost: parseFloat(unitCost),
+        unitPrice: parseFloat(unitPrice),
         cost: unitPrice * quantity,
         revenue: unitCost * quantity,
+        
       };
+      
 
       try {
         const response = await fetch("http://localhost:8000/data", {
@@ -255,7 +284,7 @@ export default function Form() {
           console.error("Failed");
         }
       } catch (error) {
-        console.error("Error in submiting", error);
+        console.error("Error in submitting", error);
       }
     }
   }
