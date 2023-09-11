@@ -35,7 +35,12 @@ export const SidebarData = [
     icon: <FaIcons.FaWpforms />,
     cName: "nav-text",
   },
-
+  {
+    title: "WorldMap",
+    path: "/worldmap",
+    icon: <FaIcons.FaGlobe />,
+    cName: "nav-text",
+  },
   {
     title: "About US",
     path: "/aboutus",

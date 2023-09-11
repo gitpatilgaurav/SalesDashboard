@@ -72,7 +72,7 @@ export default function Table() {
     setSearch(e.target.value);
   }
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
   const pagesToShow = 10;
 
   const totalPages = Math.ceil(apiData.length / itemsPerPage);
@@ -134,7 +134,7 @@ export default function Table() {
                 ◀
               </span>
               {Array.from({ length: endPage - startPage + 1 }, (index, i) => (
-                <span
+                <span 
                   key={i}
                   onClick={onPageNumber(startPage + i)}
                   className={page === startPage + i ? "active" : ""}

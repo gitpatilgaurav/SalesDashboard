@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import Inventory from "../Routes/Inventory";
 import Error404 from "../Routes/Error404";
 import AboutUS from "../Routes/AboutUS";
+import WorldMap from "../Routes/WorldMap";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
         <Route path="/table" element={<Table />}></Route>
         <Route path="/form" element={<Form />}></Route>
         <Route path="/aboutus" element={<AboutUS />}></Route>
+        <Route path="/worldmap" element={<WorldMap />}></Route>
         <Route path="/*" element={<Error404 />}></Route>
       </Routes>
     </div>

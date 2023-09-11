@@ -1,33 +1,11 @@
 import React, { useLayoutEffect, useState } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import _ from "lodash";
 
-export default function SalesCrBar() {
-  const apiData = useSelector((state) => state.ApiReducer);
-  const [selectedYear, setSelectedYear] = useState("");
-  const monthOrder = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const filteredData = selectedYear
-    ? apiData.filter((item) => item.year === selectedYear)
-    : apiData;
-  // console.log('this is filter datas',filteredData)
-
+export default function SalesCrBar({filteredData, monthOrder}) {
+  
   const groups = _.groupBy(filteredData, "month");
 
   const sortedMonths = monthOrder.map((month) => ({
@@ -118,20 +96,10 @@ export default function SalesCrBar() {
     };
   }, [sortedMonths]);
 
-  const handleYearChange = (event) => {
-    const year = parseInt(event.target.value);
-    setSelectedYear(year);
-  };
+  
 
   return (
     <div>
-      <div className="yearDropdown">
-        <select onChange={handleYearChange} value={selectedYear}>
-          <option value="">All Years</option>
-          <option value="2016">2016</option>
-          <option value="2015">2015</option>
-        </select>
-      </div>
       <div className="chartdiv" id="chartdiv"></div>
     </div>
   );

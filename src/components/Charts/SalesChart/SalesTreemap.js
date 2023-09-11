@@ -1,30 +1,25 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
 import _ from "lodash";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5hierarchy from "@amcharts/amcharts5/hierarchy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
-export default function SalesTreemap() {
-  const apiData = useSelector((state) => state.ApiReducer);
+export default function SalesTreemap({filteredData}) {
 
-  const statesGroup = _.groupBy(apiData, "state");
+  const statesGroup = _.groupBy(filteredData, "state");
   const stateSales = Object.keys(statesGroup).map((state) => ({
     name: state,
     value: statesGroup[state].length,
-  }));
+  })); 
 
   useEffect(() => {
     let root = am5.Root.new("chartdiv3");
-
     root.setThemes([am5themes_Animated.new(root)]);
-
     let container = root.container.children.push(
       am5.Container.new(root, {
         width: am5.percent(100),
         height: am5.percent(100),
         layout: root.verticalLayout,
-
       })
     );
 
@@ -66,4 +61,3 @@ export default function SalesTreemap() {
     </div>
   );
 }
-

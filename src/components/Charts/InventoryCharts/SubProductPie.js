@@ -20,7 +20,7 @@ export default function SubProductPie() {
     let chart = root.container.children.push(
       am5percent.PieChart.new(root, {
         radius: am5.percent(70),
-        innerRadius: am5.percent(1),
+        innerRadius: am5.percent(40),
       })
     );
 

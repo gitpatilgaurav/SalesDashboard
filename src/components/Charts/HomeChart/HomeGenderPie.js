@@ -1,19 +1,14 @@
 import React, { useLayoutEffect } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
-
 import _ from "lodash";
 
-export default function HomeGenderPie() {
-  const apiData = useSelector((state) => state.ApiReducer);
-
-  const genderGroup = _.groupBy(apiData, "customer_gender");
-  const maleCount = genderGroup.M.length;
-  const femaleCount = genderGroup.F.length;
+export default function HomeGenderPie({ filteredData }) {
+  const genderGroup = _.groupBy(filteredData, "customer_gender");
+  const maleCount = genderGroup.M ? genderGroup.M.length : 0;
+  const femaleCount = genderGroup.F ? genderGroup.F.length : 0;
 
   useLayoutEffect(() => {
-    // Create root and chart
     let root = am5.Root.new("genderPie");
     let chart = root.container.children.push(
       am5percent.PieChart.new(root, {
@@ -21,6 +16,7 @@ export default function HomeGenderPie() {
         innerRadius: am5.percent(30),
       })
     );
+
     let data = [
       {
         customer_gender: "Male",
@@ -31,8 +27,6 @@ export default function HomeGenderPie() {
         count: femaleCount,
       },
     ];
-
-    // Create series
     let series = chart.series.push(
       am5percent.PieSeries.new(root, {
         name: "Series",
@@ -40,6 +34,7 @@ export default function HomeGenderPie() {
         categoryField: "customer_gender",
       })
     );
+
     series.data.setAll(data);
     series.animate({
       key: "startAngle",

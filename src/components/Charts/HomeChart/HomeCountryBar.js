@@ -1,23 +1,16 @@
 import React, { useLayoutEffect, useState } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import _ from "lodash";
 
-export default function Home_Country_Bar() {
+export default function Home_Country_Bar({filteredData}) {
 
-  const apiData = useSelector((state) => state.ApiReducer);
-  const [selectedYear, setSelectedYear] = useState('');
-
-  const countryGroup = _.groupBy(apiData, "country");
-
-  const filteredData = selectedYear
-    ? apiData.filter((item) => item.year === selectedYear)
-    : apiData;
-
+  const countryGroup = _.groupBy(filteredData, "country");
   const countrySales = Object.keys(countryGroup).map((country) => {
-    const totalSales = filteredData.filter((item) => item.country === country).length;
+    const totalSales = filteredData.filter(
+      (item) => item.country === country
+    ).length;
     return { country, totalSales };
   });
 
@@ -64,7 +57,7 @@ export default function Home_Country_Bar() {
     series1.set("fill", am5.color("#7259ff"));
     series1.columns.template.set("tooltipText", `{categoryX}: {valueY} sales`);
     series1.columns.template.setAll({
-      width: am5.percent(80)
+      width: am5.percent(80),
     });
 
     series1.appear(2000);
@@ -79,20 +72,10 @@ export default function Home_Country_Bar() {
     };
   }, [countrySales]);
 
-  const handleYearChange = (event) => {
-    const year = parseInt(event.target.value);
-    setSelectedYear(year);
-  };
 
   return (
     <div>
-      <div className="yearDropdown">
-      <select onChange={handleYearChange}>
-        <option value="">All Years</option>
-        <option value="2016">2016</option>
-        <option value="2015">2015</option>
-      </select>
-      </div>
+     
       <div className="chartdiv" id="chartdiv"></div>
     </div>
   );

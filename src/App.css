@@ -13,7 +13,6 @@
   
 }
 
-
 .error-page {
   display: flex;
   height: 100vh;
@@ -25,7 +24,6 @@
   font-size: 1rem;
   background-color: black;
   color: white;
-  
 }
 
 /* table */
@@ -35,7 +33,7 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 150px;
-  text-align: center;
+   text-align: center;
 }
 td {
   color: white;
@@ -44,7 +42,6 @@ td {
 table {
   width: 100vw;
   table-layout: fixed;
-  height: auto;
   font-size: 1rem;
 }
 .table-container {
@@ -170,7 +167,6 @@ thead {
   align-items: center;
   padding: 0 16px;
   border-radius: 4px;
-
 }
 
 .nav-text a:hover {
@@ -209,7 +205,7 @@ span {
 
 .error{
   color: red;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .form{
@@ -218,8 +214,6 @@ span {
  border-radius: 10px;
  overflow: hidden;
 }
-
-
 
 /* Dashboard */
 
@@ -239,11 +233,9 @@ span {
   display: flex;
   flex-direction: column;
 }
-
 /* .heading{
   margin-top: 50px;
 } */
-
 
 .kpi{
   display: flex;
@@ -276,11 +268,7 @@ span {
   margin-top: 100px;
   justify-content: center;
   z-index: 1;
-  
-
 }
-
-
 
 .chart{
   border: 1px solid white;
@@ -293,25 +281,19 @@ span {
   background-color: white;
   margin: 20px;
   box-shadow: 3px 0px  30px black;
-  
-
 } 
-
-
 
 .first:hover{
   color: black;
   background-color: white;
 }
 
-
 .chartdiv{
   width: 100%;
   height: 300px;
   background-color: white;
   font-size: 1rem;
-  z-index: -999;
-  
+  z-index: -999
 }
 
 .title{
@@ -321,24 +303,28 @@ span {
   font-weight: 100;
 }
 
-
 .loading{
-  font-size: 2rem;
+  /* justify-content: center; */
+  font-size: 1rem;
   color: grey;
+}
+
+.loading img{
+  width: 800px;
+  height: 500px;
 }
 
 .aboutus img{
   width: 100vw;
-
 }
 
 
-.yearDropdown{
+/* .yearDropdown{
 margin-top: 10px;
 margin-left: 450px ;
 font-size: 1rem;
 
-}
+} */
 
 select{
   border: 2px solid #1e2742;
@@ -348,4 +334,53 @@ select{
 
 #productCategoryPie1{
   font-size: 0.8rem;
+}
+
+.filters{  
+  display: flex;
+  justify-content: right;
+  font-size: 1rem;
+
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 115vh;
+  padding: 120px;
+ background-color: #1e2742;
+  /* overflow: hidden; */
+}
+
+.worldMap{
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  color: white;
+  height: 130vh;
+  width: 100%;
+}
+
+.success {
+  display: flex;
+  position: fixed;
+  top : 0;
+  left : 25%;
+  width: 50%;
+  height: 70%;
+  border: none;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+ background-color: #1e2742;
+}
+.custom-submit-button {
+ background-color: #4caf50;
+  color: #fff;
+  border: none;
+  width: 10rem;
+  border-radius: 20px;
 }
