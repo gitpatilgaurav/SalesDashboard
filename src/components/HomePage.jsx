@@ -9,6 +9,7 @@ import Inventory from "../Routes/Inventory";
 import Error404 from "../Routes/Error404";
 import AboutUS from "../Routes/AboutUS";
 import WorldMap from "../Routes/WorldMap";
+import Edit from '../Routes/Edit'
 
 export default function HomePage(props) {
   return (
@@ -20,6 +21,7 @@ export default function HomePage(props) {
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/table" element={<Table />}></Route>
         <Route path="/form" element={<Form getdata={props.getdata} />}></Route>
+        <Route path="/edit/:index" element={<Edit getdata={props.getdata} />}></Route>
         <Route path="/aboutus" element={<AboutUS />}></Route>
         <Route path="/worldmap" element={<WorldMap />}></Route>
         <Route path="/*" element={<Error404 />}></Route>

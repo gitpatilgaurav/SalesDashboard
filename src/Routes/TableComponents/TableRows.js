@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function TableRows({ apiData, search, page, itemsPerPage }) {
   return apiData
@@ -24,17 +25,22 @@ export default function TableRows({ apiData, search, page, itemsPerPage }) {
         <td>{data.date}</td>
         <td>{data.year}</td>
         <td>{data.month}</td>
-        <td>{data.customer_age || data.age}</td>
-        <td>{data.customer_gender || data.gender}</td>
+        <td>{data.customer_age}</td>
+        <td>{data.customer_gender}</td>
         <td>{data.country}</td>
         <td>{data.state}</td>
-        <td>{data.product_category || data.productCategory}</td>
-        <td>{data.sub_category || data.subCategory}</td>
+        <td>{data.product_category}</td>
+        <td>{data.sub_category}</td>
         <td>{data.quantity}</td>
-        <td>{data.unit_cost || data.unitCost}</td>
-        <td>{data.unit_price || data.unitPrice}</td>
+        <td>{data.unit_cost}</td>
+        <td>{data.unit_price}</td>
         <td>{data.cost}</td>
         <td>{data.revenue}</td>
+        <td>
+        <Link to={`/edit/${data.index}`}>
+            <button className="btn btn-success">Edit</button>
+          </Link>
+        </td>
       </tr>
     ));
 }

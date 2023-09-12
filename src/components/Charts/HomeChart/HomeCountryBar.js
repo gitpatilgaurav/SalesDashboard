@@ -1,10 +1,12 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import _ from "lodash";
 
-export default function Home_Country_Bar({filteredData}) {
+
+export default function Home_Country_Bar({ filteredData }) {
+
 
   const countryGroup = _.groupBy(filteredData, "country");
   const countrySales = Object.keys(countryGroup).map((country) => {
@@ -13,69 +15,76 @@ export default function Home_Country_Bar({filteredData}) {
     ).length;
     return { country, totalSales };
   });
-
   useLayoutEffect(() => {
+ 
     let root = am5.Root.new("chartdiv");
 
+ 
     root.setThemes([am5themes_Animated.new(root)]);
 
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
-        panY: false,
-        layout: root.verticalLayout,
+        panX: true,
+        panY: true,
+        wheelX: "panX",
         wheelY: "zoomX",
+        pinchZoomX: true,
       })
     );
 
-    // Create Y-axis
-    let yAxis = chart.yAxes.push(
-      am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {}),
-      })
-    );
+    let xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+    xRenderer.labels.template.setAll({
+      rotation: -90,
+      centerY: am5.p50,
+      centerX: am5.p100,
+      paddingRight: 15,
+    });
 
-    // Create X-Axis
-    let xAxis = chart.xAxes.push(
-      am5xy.CategoryAxis.new(root, {
-        renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "country",
-      })
-    );
+    xRenderer.grid.template.setAll({
+      location: 1,
+    });
+
+    let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+      maxDeviation: 0.3,
+      categoryField: "country",
+      renderer: xRenderer,
+      tooltip: am5.Tooltip.new(root, {}),
+    }));
+
+    let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+      maxDeviation: 0.3,
+      renderer: am5xy.AxisRendererY.new(root, {
+        strokeOpacity: 0.1,
+      }),
+    }));
+
+    let series = chart.series.push(am5xy.ColumnSeries.new(root, {
+      name: "Series 1",
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "totalSales",
+      sequencedInterpolation: true,
+      categoryXField: "country",
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{valueY}",
+      }),
+    }));
+
+    series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+    
     xAxis.data.setAll(countrySales);
+    series.data.setAll(countrySales);
 
-    // Create series
-    let series1 = chart.series.push(
-      am5xy.ColumnSeries.new(root, {
-        name: "countrys",
-        xAxis: xAxis,
-        yAxis: yAxis,
-        valueYField: "totalSales",
-        categoryXField: "country",
-      })
-    );
-    series1.data.setAll(countrySales);
-    series1.set("fill", am5.color("#7259ff"));
-    series1.columns.template.set("tooltipText", `{categoryX}: {valueY} sales`);
-    series1.columns.template.setAll({
-      width: am5.percent(80),
-    });
-
-    series1.appear(2000);
-    series1.columns.template.setAll({
-      cornerRadiusTL: 5,
-      cornerRadiusTR: 5,
-      strokeOpacity: 0,
-    });
+    series.appear(1000);
+    chart.appear(1000, 100);
 
     return () => {
       root.dispose();
     };
-  }, [countrySales]);
-
+  }, [filteredData]);
 
   return (
     <div>
-     
       <div className="chartdiv" id="chartdiv"></div>
     </div>
   );

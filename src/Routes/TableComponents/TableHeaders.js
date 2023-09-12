@@ -64,6 +64,7 @@ export default function TableHeaders({ onSorting }) {
       <th onClick={onUPClick}>Unit Price</th>
       <th onClick={onCostClick}>Cost</th>
       <th onClick={onRevenueClick}>Revenue</th>
+      <th onClick={null}>Operation</th>
     </tr>
   );
 }
