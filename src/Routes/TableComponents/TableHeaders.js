@@ -55,7 +55,7 @@ export default function TableHeaders({ onSorting }) {
       <th onClick={onMonthClick}>Month</th>
       <th onClick={onAgeClick}>Age</th>
       <th onClick={onGenderClick}>Gender</th>
-      <th onClick={onCountryClick}>Country</th>
+      <th onClick={onCountryClick}>Country</th> 
       <th onClick={onStateClick}>State</th>
       <th onClick={onPCClick}>Product Category</th>
       <th onClick={onSCClick}>Sub Category</th>

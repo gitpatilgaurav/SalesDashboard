@@ -14,14 +14,14 @@ export default function SuccessMessage(props) {
       <div className="submit-message">
         <p>Your submission details</p>
         <div className="form-data">
-          <p>Product Category: {formData.productCategory}</p>
-          <p>Sub Category: {formData.subCategory}</p>
-          <p>Unit Price: {formData.unitPrice}</p>
-          <p>Unit Cost: {formData.unitCost}</p>
+          <p>Product Category: {formData.product_category}</p>
+          <p>Sub Category: {formData.sub_category}</p>
+          <p>Unit Price: {formData.unit_price}</p>
+          <p>Unit Cost: {formData.unit_cost}</p>
           <p>Date: {formData.date}</p>
           <p>Quantity: {formData.quantity}</p>
-          <p>Age: {formData.age}</p>
-          <p>Gender: {formData.gender}</p>
+          <p>Age: {formData.customer_age}</p>
+          <p>Gender: {formData.customer_gender}</p>
           <p>Country: {formData.country}</p>
           <p>State: {formData.state}</p>
         </div>

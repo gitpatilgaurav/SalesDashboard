@@ -1,5 +1,3 @@
-import React from "react";
-
 const intialState = [];
 export default function ApiReducer(state = intialState, action) {
   switch (action.type) {
@@ -9,5 +7,3 @@ export default function ApiReducer(state = intialState, action) {
       return state;
   }
 }
-
-

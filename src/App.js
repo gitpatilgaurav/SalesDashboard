@@ -41,7 +41,7 @@ function App() {
           <p> Loading data...</p>
         </div>
       ) : (
-        <HomePage />
+        <HomePage getdata={getData} />
       )}
     </div>
   );

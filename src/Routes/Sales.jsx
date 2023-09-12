@@ -39,6 +39,9 @@ export default function Sales() {
   const categoryGroup = _.groupBy(filteredData, "product_category");
   const subCategoryGroup = _.groupBy(filteredData, "sub_category");
 
+const yearGroup = _.groupBy(apiData,'year')
+const yearOptions = Object.keys(yearGroup);
+
   const highestSoldSubCategory = _.maxBy(
     Object.keys(subCategoryGroup),
     (subCategory) => {
@@ -79,8 +82,11 @@ export default function Sales() {
         <div className="yearDropdown">
           <select onChange={handleYearChange} value={selectedYear}>
             <option value="">All Years</option>
-            <option value="2016">2016</option>
-            <option value="2015">2015</option>
+            {yearOptions.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
           </select>
         </div>
         <div className="yearDropdown">

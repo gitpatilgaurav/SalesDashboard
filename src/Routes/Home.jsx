@@ -11,7 +11,9 @@ export default function Home() {
   const [selectedMonth, setSelectedMonth] = useState("");
   const apiData = useSelector((state) => state.ApiReducer);
 
-
+  const yearGroup = _.groupBy(apiData,'year')
+  const yearOptions = Object.keys(yearGroup);
+  
   const filteredData = apiData.filter((item) => {
     return (
       (!selectedYear || item.year === selectedYear) &&
@@ -75,8 +77,11 @@ export default function Home() {
         <div className="yearDropdown">
           <select onChange={handleYearChange}>
             <option value="">All Years</option>
-            <option value="2016">2016</option>
-            <option value="2015">2015</option>
+            {yearOptions.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
           </select>
         </div>
         <div className="yearDropdown">

@@ -10,7 +10,7 @@ import Error404 from "../Routes/Error404";
 import AboutUS from "../Routes/AboutUS";
 import WorldMap from "../Routes/WorldMap";
 
-export default function HomePage() {
+export default function HomePage(props) {
   return (
     <div>
       <Navbar />
@@ -19,7 +19,7 @@ export default function HomePage() {
         <Route path="/sales" element={<Sales />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/table" element={<Table />}></Route>
-        <Route path="/form" element={<Form />}></Route>
+        <Route path="/form" element={<Form getdata={props.getdata} />}></Route>
         <Route path="/aboutus" element={<AboutUS />}></Route>
         <Route path="/worldmap" element={<WorldMap />}></Route>
         <Route path="/*" element={<Error404 />}></Route>

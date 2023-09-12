@@ -7,23 +7,25 @@ import SuccessMessage from "./FormComponents/SuccessMessage";
 import ResetForm from "./FormComponents/ResetForm";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-export default function Form() {
+
+export default function Form(props) {
   const apiData = useSelector((state) => state.ApiReducer);
-  const [productCategory, setProductCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
-  const [unitPrice, setUnitPrice] = useState("");
-  const [unitCost, setUnitCost] = useState("");
+  console.log(apiData)
+
+  const [product_category, setProductCategory] = useState("");
+  const [sub_category, setSubCategory] = useState("");
+  const [unit_price, setUnitPrice] = useState("");
+  const [unit_cost, setUnitCost] = useState("");
   const [date, setDate] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [customer_age, setAge] = useState("");
+  const [customer_gender, setGender] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [year, setYear] = useState(""); 
 const [month, setMonth] = useState(""); 
-console.log(year)
   const [productCategoryError, setProductCategoryError] = useState("");
   const [subCategoryError, setSubCategoryError] = useState("");
   const [unitPriceError, setUnitPriceError] = useState("");
@@ -36,15 +38,16 @@ console.log(year)
   const [stateError, setStateError] = useState("");
 
   const validateStringInput = (inputValue) => {
-    const trimmedValue = inputValue.trim();
-    if (/^[A-Za-z\s]+$/.test(trimmedValue)) {
-      return { value: trimmedValue, error: null };
+    if (/^[A-Za-z][A-Za-z\s]*$/.test(inputValue)) {
+      return { value: inputValue, error: null };
     }
     return {
       value: inputValue,
-      error: "Only alphabets and spaces are allowed.",
+      error: "Only alphabets and spaces are allowed",
     };
   };
+  
+
 
   const validateNumericInput = (inputValue) => {
     const numericValue = parseFloat(inputValue);
@@ -128,6 +131,7 @@ console.log(year)
       setGenderError("Please select a valid gender.");
     }
   }
+  // console.log(gender)
 
   function onCountryChange(event) {
     const { value, error } = validateStringInput(event.target.value);
@@ -159,34 +163,34 @@ console.log(year)
       countryError ||
       stateError
     ) {
-      console.log("error");
+      // console.log("error");
       return;
     }
 
     let isValid = true;
 
-    if (!productCategory) {
+    if (!product_category) {
       setProductCategoryError("Product category is required.");
       isValid = false;
     } else {
       setProductCategoryError("");
     }
 
-    if (!subCategory) {
+    if (!sub_category) {
       setSubCategoryError("Sub category is required.");
       isValid = false;
     } else {
       setSubCategoryError("");
     }
 
-    if (!unitPrice) {
+    if (!unit_price) {
       setUnitPriceError("Unit price is required.");
       isValid = false;
     } else {
       setUnitPriceError("");
     }
 
-    if (!unitCost) {
+    if (!unit_cost) {
       setUnitCostError("Unit cost is required.");
       isValid = false;
     } else {
@@ -207,14 +211,14 @@ console.log(year)
       setQuantityError("");
     }
 
-    if (!age) {
+    if (!customer_age) {
       setAgeError("Age is required.");
       isValid = false;
     } else {
       setAgeError("");
     }
 
-    if (!gender) {
+    if (!customer_gender) {
       setGenderError("Gender is required.");
       isValid = false;
     } else {
@@ -241,23 +245,23 @@ console.log(year)
       const formData = {
         index: apiData.length + 1,
         date,
-        year,
+        id: apiData.length + 1,
+        year:parseInt(year),
         month,
-        age: parseInt(age),
-        gender,
+        customer_age,
+        customer_gender,
         country,
         state,
-        productCategory,
-        subCategory,
-        quantity: parseInt(quantity),
-        unitCost: parseFloat(unitCost),
-        unitPrice: parseFloat(unitPrice),
-        cost: unitPrice * quantity,
-        revenue: unitCost * quantity,
+        product_category,
+        sub_category,
+        quantity,
+        unit_cost,
+        unit_price,
+        cost: unit_price * quantity,
+        revenue: unit_cost * quantity,
         
       };
-      
-
+ console.log(formData)
       try {
         const response = await fetch("http://localhost:8000/data", {
           method: "POST",
@@ -267,6 +271,7 @@ console.log(year)
           body: JSON.stringify(formData),
         });
         if (response.ok) {
+          props.getdata()
           console.log("Data submitted successfully.");
           setProductCategory("");
           setSubCategory("");
@@ -294,14 +299,14 @@ console.log(year)
       <h5>Fill New Entries</h5>
       <br />
       <div className="form">
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={onSubmitHandler} method="post">
           <div className="row">
             <div className="col">
               <TextInput
                 label="Product Category"
                 id="product_category"
                 placeholder="Product Category"
-                value={productCategory}
+                value={product_category}
                 onChange={onProductCategoryChange}
               />
               <span className="error">{productCategoryError}</span>
@@ -311,7 +316,7 @@ console.log(year)
                 label="Sub Category"
                 id="sub_category"
                 placeholder="Sub Category"
-                value={subCategory}
+                value={sub_category}
                 onChange={onSubCategoryChange}
               />
               <span className="error">{subCategoryError}</span>
@@ -321,7 +326,7 @@ console.log(year)
                 label="Unit Price"
                 id="unit_price"
                 placeholder="Unit Price"
-                value={unitPrice}
+                value={unit_price}
                 onChange={onUnitPriceChange}
               />
               <span className="error">{unitPriceError}</span>
@@ -331,7 +336,7 @@ console.log(year)
                 label="Unit Cost"
                 id="unit_cost"
                 placeholder="Unit Cost"
-                value={unitCost}
+                value={unit_cost}
                 onChange={onUnitCostChange}
               />
               <span className="error">{unitCostError}</span>
@@ -359,11 +364,11 @@ console.log(year)
               <span className="error">{quantityError}</span>
             </div>
             <div className="col">
-              <TextInput
+              <NumberInput
                 label="Age"
                 id="age"
                 placeholder="Age"
-                value={age}
+                value={customer_age}
                 onChange={onAgeChange}
               />
               <span className="error">{ageError}</span>
@@ -373,7 +378,7 @@ console.log(year)
                 label="Gender"
                 id="gender"
                 options={["F", "M"]}
-                value={gender}
+                value={customer_gender}
                 onChange={onGenderChange}
               />
               <span className="error">{genderError}</span>
