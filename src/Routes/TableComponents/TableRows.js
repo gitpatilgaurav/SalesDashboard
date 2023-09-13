@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 export default function TableRows({ apiData, search, page, itemsPerPage }) {
   return apiData
@@ -22,7 +23,7 @@ export default function TableRows({ apiData, search, page, itemsPerPage }) {
     .map((data, index) => (
       <tr key={index}>
         <td>{data.index}</td>
-        <td>{data.date}</td>
+        <td>{format(new Date(data.date), 'yyyy-MM-dd')}</td>
         <td>{data.year}</td>
         <td>{data.month}</td>
         <td>{data.customer_age}</td>
@@ -37,7 +38,7 @@ export default function TableRows({ apiData, search, page, itemsPerPage }) {
         <td>{data.cost}</td>
         <td>{data.revenue}</td>
         <td>
-        <Link to={`/edit/${data.index}`}>
+          <Link to={`/edit/${data.index}`}>
             <button className="btn btn-success">Edit</button>
           </Link>
         </td>

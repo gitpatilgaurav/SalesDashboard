@@ -59,18 +59,25 @@ export default function Home_Country_Bar({ filteredData }) {
     }));
 
     let series = chart.series.push(am5xy.ColumnSeries.new(root, {
-      name: "Series 1",
-      xAxis: xAxis,
-      yAxis: yAxis,
-      valueYField: "totalSales",
-      sequencedInterpolation: true,
-      categoryXField: "country",
-      tooltip: am5.Tooltip.new(root, {
-        labelText: "{valueY}",
-      }),
-    }));
+  name: "Series 1",
+  xAxis: xAxis,
+  yAxis: yAxis,
+  valueYField: "totalSales",
+  sequencedInterpolation: true,
+  categoryXField: "country",
+  tooltip: am5.Tooltip.new(root, {
+    labelText: "{country}: {totalsales}",
+  }), 
+}));
 
     series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+    series.columns.template.adapters.add("fill", function(fill, target) {
+      return chart.get("colors").getIndex(series.columns.indexOf(target));
+    });
+    
+    series.columns.template.adapters.add("stroke", function(stroke, target) {
+      return chart.get("colors").getIndex(series.columns.indexOf(target));
+    });
     
     xAxis.data.setAll(countrySales);
     series.data.setAll(countrySales);

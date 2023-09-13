@@ -25,7 +25,7 @@ export default function Form(props) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [year, setYear] = useState(""); 
-const [month, setMonth] = useState(""); 
+  const [month, setMonth] = useState(""); 
   const [productCategoryError, setProductCategoryError] = useState("");
   const [subCategoryError, setSubCategoryError] = useState("");
   const [unitPriceError, setUnitPriceError] = useState("");
@@ -241,9 +241,9 @@ const [month, setMonth] = useState("");
 
     if (isValid) {
     
-
+    let index = parseInt(apiData.length)
       const formData = {
-        index: apiData.length + 1,
+        index: index +1,
         date,
         id: apiData.length + 1,
         year:parseInt(year),

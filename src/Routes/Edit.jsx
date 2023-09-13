@@ -50,9 +50,9 @@ export default function Form(props) {
     };
   };
   
-useEffect(() => {
+  useEffect(() => {
     const selectedItem = apiData.find((data) => data.index === parseInt(index));
-
+  
     if (selectedItem) {
       setFetchedData(selectedItem);
       setProductCategory(selectedItem.product_category);
@@ -65,8 +65,21 @@ useEffect(() => {
       setGender(selectedItem.customer_gender);
       setCountry(selectedItem.country);
       setState(selectedItem.state);
+  
+      const selectedDate = new Date(selectedItem.date);
+      if (!isNaN(selectedDate.getTime())) {
+        const year = selectedDate.getFullYear();
+        const monthNames = [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        const month = monthNames[selectedDate.getMonth()];
+        setYear(year.toString());
+        setMonth(month);
+      }
     }
   }, [apiData, index]);
+  
 
   const validateNumericInput = (inputValue) => {
     const numericValue = parseFloat(inputValue);
@@ -260,9 +273,8 @@ useEffect(() => {
   
     if (isValid) {
       const updatedData = {
-        index: parseInt(index),
+        index,
         date,
-        id: parseInt(index),
         year: parseInt(year),
         month,
         customer_age,
@@ -287,19 +299,19 @@ useEffect(() => {
           body: JSON.stringify(updatedData),
         });
         if (response.ok) {
-          props.getdata();
-          console.log("Data updated successfully.");
+          console.log("Data updated");
           setShowSuccess(true);
           setSubmittedData(updatedData);
+          props.getdata();
         } else {
-          console.error("Failed to update data.");
-        }
+          console.error("Failed to update");
+        } 
       } catch (error) {
-        console.error("Error in updating data", error);
+        console.error("Error in updating", error);
       }
     }
   }
-  
+
 
   return (
     <div className="form-container">

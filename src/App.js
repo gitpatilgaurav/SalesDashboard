@@ -4,6 +4,7 @@ import "./App.css";
 import { getDataAction } from "./action/Action";
 import HomePage from "./components/HomePage";
 
+
 function App() {
   const dispatch = useDispatch();
   const apiData = useSelector((state) => state.ApiReducer);
@@ -29,6 +30,7 @@ function App() {
       console.error("Error ", error);
     }
   };
+  
 
   return (
     <div className="App">
