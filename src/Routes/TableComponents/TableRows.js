@@ -24,7 +24,7 @@ export default function TableRows({ apiData, search, page, itemsPerPage }) {
       <tr key={index}>
         <td>{data.index}</td>
         <td>{format(new Date(data.date), 'yyyy-MM-dd')}</td>
-        <td>{data.year}</td>
+        {/* <td>{data.year}</td> */}
         <td>{data.month}</td>
         <td>{data.customer_age}</td>
         <td>{data.customer_gender}</td>
@@ -33,8 +33,8 @@ export default function TableRows({ apiData, search, page, itemsPerPage }) {
         <td>{data.product_category}</td>
         <td>{data.sub_category}</td>
         <td>{data.quantity}</td>
-        <td>{data.unit_cost}</td>
-        <td>{data.unit_price}</td>
+        {/* <td>{data.unit_cost}</td>
+        <td>{data.unit_price}</td> */}
         <td>{data.cost}</td>
         <td>{data.revenue}</td>
         <td>

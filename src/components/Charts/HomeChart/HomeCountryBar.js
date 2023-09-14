@@ -88,7 +88,7 @@ export default function Home_Country_Bar({ filteredData }) {
     return () => {
       root.dispose();
     };
-  }, [filteredData]);
+  }, [filteredData,countrySales]);
 
   return (
     <div>

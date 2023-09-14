@@ -9,11 +9,8 @@ import ResetForm from "./FormComponents/ResetForm";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 
-export default function Form(props) {
+export default function Edit(props) {
   const apiData = useSelector((state) => state.ApiReducer);
-  console.log(apiData)
-
-  const [fetchedData, setFetchedData] = useState({});
   const [product_category, setProductCategory] = useState("");
   const [sub_category, setSubCategory] = useState("");
   const [unit_price, setUnitPrice] = useState("");
@@ -40,21 +37,13 @@ export default function Form(props) {
   const [stateError, setStateError] = useState("");
   const { index } = useParams();
 
-  const validateStringInput = (inputValue) => {
-    if (/^[A-Za-z][A-Za-z\s]*$/.test(inputValue)) {
-      return { value: inputValue, error: null };
-    }
-    return {
-      value: inputValue,
-      error: "Only alphabets and spaces are allowed",
-    };
-  };
-  
+  // const selectedItem = apiData.find((data) => data.index === parseInt(index) );
   useEffect(() => {
+   
     const selectedItem = apiData.find((data) => data.index === parseInt(index));
-  
+    console.log(selectedItem)
+   
     if (selectedItem) {
-      setFetchedData(selectedItem);
       setProductCategory(selectedItem.product_category);
       setSubCategory(selectedItem.sub_category);
       setUnitPrice(selectedItem.unit_price);
@@ -74,12 +63,24 @@ export default function Form(props) {
           'July', 'August', 'September', 'October', 'November', 'December'
         ];
         const month = monthNames[selectedDate.getMonth()];
-        setYear(year.toString());
-        setMonth(month);
+        setYear(year);
+        setMonth(month);  
       }
     }
-  }, [apiData, index]);
+  }, [apiData,index]);
   
+  
+
+  
+  const validateStringInput = (inputValue) => {
+    if (/^[A-Za-z][A-Za-z\s]*$/.test(inputValue)) {
+      return { value: inputValue, error: null };
+    }
+    return {
+      value: inputValue,
+      error: "Only alphabets and spaces are allowed",
+    };
+  };
 
   const validateNumericInput = (inputValue) => {
     const numericValue = parseFloat(inputValue);
@@ -93,7 +94,7 @@ export default function Form(props) {
   };
 
   function onProductCategoryChange(event) {
-    const { value, error } = validateStringInput(event.target.value);
+    const { value, error } = validateStringInput(event.target.value.trim());
     setProductCategoryError(error);
     setProductCategory(value);
   }
@@ -140,7 +141,6 @@ export default function Form(props) {
       setDateError("Invalid date format.");
     }
   }
-  
 
   function onQuantityChange(event) {
     const { value, error } = validateNumericInput(event.target.value);
@@ -156,21 +156,17 @@ export default function Form(props) {
 
   function onGenderChange(event) {
     const { value } = event.target;
-    if (value === "F" || value === "M") {
+    
       setGender(value);
       setGenderError("");
-    } else {
-      setGenderError("Please select a valid gender.");
-    }
   }
   // console.log(gender)
 
   function onCountryChange(event) {
-    const { value, error } = validateStringInput(event.target.value);
+    const { value} = event.target;
     setCountry(value);
-    setCountryError(error);
+    setCountryError("");
   }
-
   function onStateChange(event) {
     const { value, error } = validateStringInput(event.target.value);
     setState(value);
@@ -273,9 +269,9 @@ export default function Form(props) {
   
     if (isValid) {
       const updatedData = {
-        index,
+        index : parseInt(index),
         date,
-        year: parseInt(year),
+        year,
         month,
         customer_age,
         customer_gender,
@@ -406,11 +402,12 @@ export default function Form(props) {
 
           <div className="row">
             <div className="col">
-              <TextInput
+            <SelectInput
                 label="Country"
                 id="country"
-                placeholder="Country"
+                options={["United States", "France","Germany","India","Russia","Japan","Argentina"]}
                 value={country}
+                placeholder = "Select Country"
                 onChange={onCountryChange}
               />
               <span className="error">{countryError}</span>

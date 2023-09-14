@@ -103,33 +103,62 @@ import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
       const franceData = countryAverages.find((data) => data.country === "France");
       const ukData = countryAverages.find((data) => data.country === "United Kingdom");
       const germanyData = countryAverages.find((data) => data.country === "Germany");
+      const jpData = countryAverages.find((data) => data.country === "Japan");
+      const indData = countryAverages.find((data) => data.country === "India");
+      const ruData = countryAverages.find((data) => data.country === "Russia");
+      const arData = countryAverages.find((data) => data.country === "Argentina");
 
       bubbleSeries.data.setAll([
         {
           id: "US",
           name: "United States",
-          value: usData.averageAge,
+          value: (usData && usData.averageAge) || 0,
           circleTemplate: { fill: colors.getIndex(10) },
         },
         {
-            id: "GB",
-            name: "United Kingdom",
-            value: ukData.averageAge,
-            circleTemplate: { fill: colors.getIndex(12) },
-          },
-          {
-            id: "FR",
-            name: "France",
-            value: franceData.averageAge,
-            circleTemplate: { fill: colors.getIndex(13) },
-          },
-          {
-            id: "DE",
-            name: "Germany",
-            value: germanyData.averageAge,
-            circleTemplate: { fill: colors.getIndex(14) },
-          },
+          id: "GB",
+          name: "United Kingdom",
+          value: (ukData && ukData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(12) },
+        },
+        {
+          id: "FR",
+          name: "France",
+          value: (franceData && franceData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(13) },
+        },
+        {
+          id: "DE",
+          name: "Germany",
+          value: (germanyData && germanyData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(14) },
+        },
+        {
+          id: "IN",
+          name: "India",
+          value: (indData && indData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(15) },
+        },
+        {
+          id: "AR",
+          name: "Argentina",
+          value: (arData && arData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(16) },
+        },
+        {
+          id: "RU",
+          name: "Russia",
+          value: (ruData && ruData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(17) },
+        },
+        {
+          id: "JP",
+          name: "Japan",
+          value: (jpData && jpData.averageAge) || 0,
+          circleTemplate: { fill: colors.getIndex(18) },
+        }
       ]);
+      
   
       let cont = chart.children.push(am5.Container.new(root, {
         layout: root.horizontalLayout,

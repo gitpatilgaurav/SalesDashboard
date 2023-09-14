@@ -21,7 +21,7 @@ export default function HomePage(props) {
         <Route path="/inventory" element={<Inventory />}></Route>
         <Route path="/table" element={<Table />}></Route>
         <Route path="/form" element={<Form getdata={props.getdata} />}></Route>
-        <Route path="/edit/:index" element={<Edit getdata={props.getdata} />}></Route>
+        <Route exact path="/edit/:index" element={<Edit getdata={props.getdata} />}></Route>
         <Route path="/aboutus" element={<AboutUS />}></Route>
         <Route path="/worldmap" element={<WorldMap />}></Route>
         <Route path="/*" element={<Error404 />}></Route>

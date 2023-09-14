@@ -7,9 +7,9 @@ export default function TableHeaders({ onSorting }) {
   function onDateClick() {
     onSorting("date");
   }
-  function onYearClick() {
-    onSorting("year");
-  }
+  // function onYearClick() {
+  //   onSorting("year");
+  // }
   function onMonthClick() {
     onSorting("month");
   }
@@ -31,12 +31,12 @@ export default function TableHeaders({ onSorting }) {
   function onSCClick() {
     onSorting("sub_category");
   }
-  function onUCClick() {
-    onSorting("unit_cost");
-  }
-  function onUPClick() {
-    onSorting("unit_price");
-  }
+  // function onUCClick() {
+  //   onSorting("unit_cost");
+  // }
+  // function onUPClick() {
+  //   onSorting("unit_price");
+  // }
   function onCostClick() {
     onSorting("cost");
   }
@@ -51,7 +51,7 @@ export default function TableHeaders({ onSorting }) {
     <tr>
       <th onClick={onIDClick}>ID</th>
       <th onClick={onDateClick}>Date</th>
-      <th onClick={onYearClick}>Year</th>
+      {/* <th onClick={onYearClick}>Year</th> */}
       <th onClick={onMonthClick}>Month</th>
       <th onClick={onAgeClick}>Age</th>
       <th onClick={onGenderClick}>Gender</th>
@@ -60,8 +60,8 @@ export default function TableHeaders({ onSorting }) {
       <th onClick={onPCClick}>Product Category</th>
       <th onClick={onSCClick}>Sub Category</th>
       <th onClick={onQuantityClick}>Quantity</th>
-      <th onClick={onUCClick}>Unit Cost</th>
-      <th onClick={onUPClick}>Unit Price</th>
+      {/* <th onClick={onUCClick}>Unit Cost</th>
+      <th onClick={onUPClick}>Unit Price</th> */}
       <th onClick={onCostClick}>Cost</th>
       <th onClick={onRevenueClick}>Revenue</th>
       <th onClick={null}>Operation</th>

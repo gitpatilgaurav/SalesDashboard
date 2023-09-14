@@ -7,10 +7,9 @@ import SuccessMessage from "./FormComponents/SuccessMessage";
 import ResetForm from "./FormComponents/ResetForm";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-
 export default function Form(props) {
   const apiData = useSelector((state) => state.ApiReducer);
-  console.log(apiData)
+  console.log(apiData);
 
   const [product_category, setProductCategory] = useState("");
   const [sub_category, setSubCategory] = useState("");
@@ -24,8 +23,8 @@ export default function Form(props) {
   const [state, setState] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
-  const [year, setYear] = useState(""); 
-  const [month, setMonth] = useState(""); 
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
   const [productCategoryError, setProductCategoryError] = useState("");
   const [subCategoryError, setSubCategoryError] = useState("");
   const [unitPriceError, setUnitPriceError] = useState("");
@@ -42,12 +41,9 @@ export default function Form(props) {
       return { value: inputValue, error: null };
     }
     return {
-      value: inputValue,
       error: "Only alphabets and spaces are allowed",
     };
   };
-  
-
 
   const validateNumericInput = (inputValue) => {
     const numericValue = parseFloat(inputValue);
@@ -55,7 +51,6 @@ export default function Form(props) {
       return { value: numericValue, error: null };
     }
     return {
-      value: inputValue,
       error: "Please enter a valid positive number.",
     };
   };
@@ -86,29 +81,35 @@ export default function Form(props) {
 
   function onDateChange(event) {
     const selectedDate = new Date(event.target.value);
-  
-    if (!isNaN(selectedDate.getTime())) {
 
+    if (!isNaN(selectedDate.getTime())) {
       const year = selectedDate.getFullYear();
-  
-     
+
       const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ];
-  
-   
+
       const month = monthNames[selectedDate.getMonth()];
-  
+
       setDate(event.target.value);
       setDateError("");
-      setYear(year.toString());
-      setMonth(month); 
+      setYear(year);
+      setMonth(month);
     } else {
       setDateError("Invalid date format.");
     }
   }
-  
 
   function onQuantityChange(event) {
     const { value, error } = validateNumericInput(event.target.value);
@@ -124,20 +125,18 @@ export default function Form(props) {
 
   function onGenderChange(event) {
     const { value } = event.target;
-    if (value === "F" || value === "M") {
+    
       setGender(value);
       setGenderError("");
-    } else {
-      setGenderError("Please select a valid gender.");
-    }
   }
   // console.log(gender)
 
   function onCountryChange(event) {
-    const { value, error } = validateStringInput(event.target.value);
+    const { value} = event.target;
     setCountry(value);
-    setCountryError(error);
+    setCountryError("");
   }
+  // console.log(country)
 
   function onStateChange(event) {
     const { value, error } = validateStringInput(event.target.value);
@@ -167,20 +166,39 @@ export default function Form(props) {
       return;
     }
 
+    const trimmedProductCategory = product_category.trim();
+    const trimmedSubCategory = sub_category.trim();
+    const trimmedCountry = country.trim();
+    const trimmedState = state.trim();
+
     let isValid = true;
 
-    if (!product_category) {
+    if (!trimmedProductCategory) {
       setProductCategoryError("Product category is required.");
       isValid = false;
     } else {
       setProductCategoryError("");
     }
 
-    if (!sub_category) {
+    if (!trimmedSubCategory) {
       setSubCategoryError("Sub category is required.");
       isValid = false;
     } else {
       setSubCategoryError("");
+    }
+
+    if (!trimmedCountry) {
+      setCountryError("Country is required.");
+      isValid = false;
+    } else {
+      setCountryError("");
+    }
+
+    if (!trimmedState) {
+      setStateError("State is required.");
+      isValid = false;
+    } else {
+      setStateError("");
     }
 
     if (!unit_price) {
@@ -225,43 +243,27 @@ export default function Form(props) {
       setGenderError("");
     }
 
-    if (!country) {
-      setCountryError("Country is required.");
-      isValid = false;
-    } else {
-      setCountryError("");
-    }
-
-    if (!state) {
-      setStateError("State is required.");
-      isValid = false;
-    } else {
-      setStateError("");
-    }
-
     if (isValid) {
-    
-    let index = parseInt(apiData.length)
+      let index = parseInt(apiData.length);
       const formData = {
-        index: index +1,
+        index: index + 1,
         date,
         id: apiData.length + 1,
-        year:parseInt(year),
+        year,
         month,
         customer_age,
         customer_gender,
-        country,
-        state,
-        product_category,
-        sub_category,
+        country: trimmedCountry,
+        state: trimmedState,
+        product_category: trimmedProductCategory,
+        sub_category: trimmedSubCategory,
         quantity,
         unit_cost,
         unit_price,
         cost: unit_price * quantity,
         revenue: unit_cost * quantity,
-        
       };
- console.log(formData)
+      console.log(formData);
       try {
         const response = await fetch("http://localhost:8000/data", {
           method: "POST",
@@ -271,7 +273,7 @@ export default function Form(props) {
           body: JSON.stringify(formData),
         });
         if (response.ok) {
-          props.getdata()
+          props.getdata();
           console.log("Data submitted successfully.");
           setProductCategory("");
           setSubCategory("");
@@ -379,6 +381,7 @@ export default function Form(props) {
                 id="gender"
                 options={["F", "M"]}
                 value={customer_gender}
+                placeholder = "Select Gender"
                 onChange={onGenderChange}
               />
               <span className="error">{genderError}</span>
@@ -387,13 +390,21 @@ export default function Form(props) {
 
           <div className="row">
             <div className="col">
-              <TextInput
+            <SelectInput
+                label="Country"
+                id="country"
+                options={["United States", "France","Germany","India","Russia","Japan","Argentina"]}
+                value={country}
+                placeholder = "Select Country"
+                onChange={onCountryChange}
+              />
+              {/* <TextInput
                 label="Country"
                 id="country"
                 placeholder="Country"
                 value={country}
                 onChange={onCountryChange}
-              />
+              /> */}
               <span className="error">{countryError}</span>
             </div>
             <div className="col">
