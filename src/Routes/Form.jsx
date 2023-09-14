@@ -125,14 +125,14 @@ export default function Form(props) {
 
   function onGenderChange(event) {
     const { value } = event.target;
-    
-      setGender(value);
-      setGenderError("");
+
+    setGender(value);
+    setGenderError("");
   }
   // console.log(gender)
 
   function onCountryChange(event) {
-    const { value} = event.target;
+    const { value } = event.target;
     setCountry(value);
     setCountryError("");
   }
@@ -381,7 +381,7 @@ export default function Form(props) {
                 id="gender"
                 options={["F", "M"]}
                 value={customer_gender}
-                placeholder = "Select Gender"
+                placeholder="Select Gender"
                 onChange={onGenderChange}
               />
               <span className="error">{genderError}</span>
@@ -390,12 +390,20 @@ export default function Form(props) {
 
           <div className="row">
             <div className="col">
-            <SelectInput
+              <SelectInput
                 label="Country"
                 id="country"
-                options={["United States", "France","Germany","India","Russia","Japan","Argentina"]}
+                options={[
+                  "United States",
+                  "France",
+                  "Germany",
+                  "India",
+                  "Russia",
+                  "Japan",
+                  "Argentina",
+                ]}
                 value={country}
-                placeholder = "Select Country"
+                placeholder="Select Country"
                 onChange={onCountryChange}
               />
               {/* <TextInput

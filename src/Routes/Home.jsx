@@ -3,19 +3,19 @@ import _, { groupBy } from "lodash";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import HomeGenderPie from "../components/Charts/HomeChart/HomeGenderPie";
 import HomeCountryBar from "../components/Charts/HomeChart/HomeCountryBar";
+import DropDownFilter from '../components/Filters/DropDownFilter'
 import KPI from "./UiComponents/KPI";
 import Chart from "./UiComponents/Charts";
 
 export default function Home() {
+  const apiData = useSelector((state) => state.ApiReducer);
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
-  const apiData = useSelector((state) => state.ApiReducer);
-
   const yearGroup = _.groupBy(apiData,'year')
   const yearOptions = Object.keys(yearGroup);
   
   const filteredData = apiData.filter((item) => {
-    return (
+    return (  
       (!selectedYear || item.year === selectedYear) &&
       (!selectedMonth || item.month === selectedMonth)
     );
@@ -73,29 +73,15 @@ export default function Home() {
           <KPI title="Total Sales" value={total_Transaction} />
           <KPI title="Total Cash Flow" value={`$ ${total_cost}`} />
           <KPI title="Total Profit" value={`$ ${total_profit}`} />
-          <div className="filters">
-        <div className="yearDropdown">
-          <select onChange={handleYearChange}>
-            <option value="">All Years</option>
-            {yearOptions.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-          </select>
-        </div>
-        <div className="yearDropdown">
-          <select onChange={handleMonthChange}>
-            <option value="">All Months</option>
-            {months.map((month) => (
-              <option key={month} value={month}>
-                {month}
-              </option>
-            ))}
-          </select>
+           <DropDownFilter
+            yearOptions={yearOptions}
+            selectedYear={selectedYear}
+            months={months}
+            selectedMonth={selectedMonth}
+            onYearChange={handleYearChange}
+            onMonthChange={handleMonthChange}
+          />
           
-        </div>
-      </div>
         </div>
         
         <div className="charts">

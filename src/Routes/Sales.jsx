@@ -3,6 +3,7 @@ import _ from "lodash";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import SalesCRBar from "../components/Charts/SalesChart/SalesCRBar";
 import SalesTreemap from "../components/Charts/SalesChart/SalesTreemap";
+import DropDownFilter from '../components/Filters/DropDownFilter'
 import KPI from "./UiComponents/KPI";
 import Chart from "./UiComponents/Charts";
 
@@ -78,28 +79,14 @@ const yearOptions = Object.keys(yearGroup);
           <KPI title="Most Demanding Product" value={highestSoldSubCategory} />
           <KPI title="Total Items Sold" value={totalQuantity} />
           <KPI title="Profit Percentage" value={`${profitPercentage}%`} />
-          <div className="filters">
-        <div className="yearDropdown">
-          <select onChange={handleYearChange} value={selectedYear}>
-            <option value="">All Years</option>
-            {yearOptions.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-          </select>
-        </div>
-        <div className="yearDropdown">
-          <select onChange={handleMonthChange} value={selectedMonth}>
-            <option value="">All Months</option>
-            {monthOrder.map((month) => (
-              <option key={month} value={month}>
-                {month}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+          <DropDownFilter
+            yearOptions={yearOptions}
+            selectedYear={selectedYear}
+            months={monthOrder}
+            selectedMonth={selectedMonth}
+            onYearChange={handleYearChange}
+            onMonthChange={handleMonthChange}
+          />
         </div>
         <div className="charts">
           <Chart

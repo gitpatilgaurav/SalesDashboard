@@ -12,6 +12,7 @@ import WorldMap from "../Routes/WorldMap";
 import Edit from '../Routes/Edit'
 
 export default function HomePage(props) {
+  
   return (
     <div>
       <Navbar />
