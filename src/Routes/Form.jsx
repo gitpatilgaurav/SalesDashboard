@@ -6,10 +6,11 @@ import SelectInput from "./FormComponents/SelectInput";
 import SuccessMessage from "./FormComponents/SuccessMessage";
 import ResetForm from "./FormComponents/ResetForm";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Form(props) {
   const apiData = useSelector((state) => state.ApiReducer);
-  console.log(apiData);
+  // console.log(apiData);
 
   const [product_category, setProductCategory] = useState("");
   const [sub_category, setSubCategory] = useState("");
@@ -154,7 +155,7 @@ export default function Form(props) {
       productCategoryError ||
       subCategoryError ||
       unitPriceError ||
-      unitCostError ||
+      unitCostError || 
       dateError ||
       quantityError ||
       ageError ||
@@ -170,6 +171,8 @@ export default function Form(props) {
     const trimmedSubCategory = sub_category.trim();
     const trimmedCountry = country.trim();
     const trimmedState = state.trim();
+
+   console.log(trimmedProductCategory)
 
     let isValid = true;
 
@@ -248,7 +251,6 @@ export default function Form(props) {
       const formData = {
         index: index + 1,
         date,
-        id: apiData.length + 1,
         year,
         month,
         customer_age,
@@ -262,6 +264,7 @@ export default function Form(props) {
         unit_price,
         cost: unit_price * quantity,
         revenue: unit_cost * quantity,
+        id: uuidv4(),
       };
       console.log(formData);
       try {

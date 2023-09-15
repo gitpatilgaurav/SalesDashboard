@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+
 import _ from "lodash";
 
 
@@ -16,15 +17,15 @@ export default function Home_Country_Bar({ filteredData }) {
     return { country, totalSales };
   });
   useLayoutEffect(() => {
- 
+
     let root = am5.Root.new("chartdiv");
 
     root.setThemes([am5themes_Animated.new(root)]);
 
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
-        panX: true,
-        panY: true,
+        // panX: true,
+        // panY: true,
         wheelX: "panX",
         wheelY: "zoomX",
         pinchZoomX: true,
@@ -39,9 +40,9 @@ export default function Home_Country_Bar({ filteredData }) {
       paddingRight: 15,
     });
 
-    xRenderer.grid.template.setAll({
-      location: 1,
-    });
+    // xRenderer.grid.template.setAll({
+    //   location: 1,
+    // });
 
     let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
       maxDeviation: 0.3,
@@ -58,16 +59,16 @@ export default function Home_Country_Bar({ filteredData }) {
     }));
 
     let series = chart.series.push(am5xy.ColumnSeries.new(root, {
-  name: "Series 1",
-  xAxis: xAxis,
-  yAxis: yAxis,
-  valueYField: "totalSales",
-  sequencedInterpolation: true,
-  categoryXField: "country",
-  tooltip: am5.Tooltip.new(root, {
-    labelText: "{country}: {totalsales}",
-  }), 
-}));
+      name: "Series",
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "totalSales",
+      sequencedInterpolation: true,
+      categoryXField: "country",
+    }));
+    series.columns.template.setAll({
+      tooltipText: "{categoryX}: {valueY}"
+    });
 
     series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
     series.columns.template.adapters.add("fill", function(fill, target) {

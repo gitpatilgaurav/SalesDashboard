@@ -24,13 +24,13 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Table",
+    title: "Tabular Format",
     path: "/Table",
     icon: <FaIcons.FaTable />,
     cName: "nav-text",
   },
   {
-    title: "Form",
+    title: "Edit Entries",
     path: "/form",
     icon: <FaIcons.FaWpforms />,
     cName: "nav-text",

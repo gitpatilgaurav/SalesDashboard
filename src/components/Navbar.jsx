@@ -14,8 +14,8 @@ export default function Navbar() {
   return (
     <div>
       <div className="navbar">
-        <div className="menu-bars">
-          <FaIcons.FaBars onClick={showSidebar} />
+        <div className="menu-bars" onClick={showSidebar} >
+          <FaIcons.FaBars />
         </div>
         <h3>IKEA Sales</h3>
       </div>

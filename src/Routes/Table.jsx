@@ -97,11 +97,6 @@ export default function Table() {
     handlePageChange(page - 1);
   }
 
-  function onPageNumber(newPage) {
-    return function () {
-      handlePageChange(newPage);
-    };
-  }
 
   const startPage = Math.max(1, page - Math.floor(pagesToShow / 2));
   const endPage = Math.min(totalPages, startPage + pagesToShow - 1);
@@ -135,6 +130,7 @@ export default function Table() {
             <div className="pagination">
               <span
                 onClick={handlePrevPage}
+             
                 className={page === 1 ? "disabled" : ""}
               >
                 ◀
@@ -142,10 +138,9 @@ export default function Table() {
               {Array.from({ length: endPage - startPage + 1 }, (index, i) => (
                 <span 
                   key={i}
-                  onClick={onPageNumber(startPage + i)}
+                  onClick={handlePageChange.bind(null, startPage + i)}
                   className={page === startPage + i ? "active" : ""}
                 >
-                 
                   {startPage + i}
                 </span>
               ))}

@@ -26,6 +26,11 @@
   color: white;
 }
 
+.table-responsive{
+  height: 100vh;
+  background-color: #13192f;
+}
+
 /* table */
 th,
 td {
