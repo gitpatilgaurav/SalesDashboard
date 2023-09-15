@@ -124,7 +124,8 @@ thead {
   color: white;
   background-color: grey;
   height: 50px;
-  width: 50px;  
+  width: 50px;
+  cursor: pointer;
   border: none;
   border-radius: 10px;
 }

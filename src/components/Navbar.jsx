@@ -6,24 +6,25 @@ import { SidebarData } from "./SidebarData";
 import "../App.css";
 
 export default function Navbar() {
-
   const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
+  function showSidebar() {
+    setSidebar(!sidebar);
+  }
 
   return (
     <div>
       <div className="navbar">
-        <NavLink to="#" className="menu-bars">
+        <div className="menu-bars">
           <FaIcons.FaBars onClick={showSidebar} />
-        </NavLink>
+        </div>
         <h3>IKEA Sales</h3>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showSidebar}>
           <li className="navbar-toggle">
-            <NavLink to="#" className="menu-bars">
+            <div className="menu-bars">
               <AiIcons.AiOutlineClose />
-            </NavLink>
+            </div>
           </li>
 
           {SidebarData.map((item, index) => {

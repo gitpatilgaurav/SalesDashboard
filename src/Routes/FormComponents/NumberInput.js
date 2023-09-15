@@ -1,16 +1,16 @@
 import React from "react";
 
-export default function NumberInput({ label, id, placeholder, value, onChange }) {
+export default function NumberInput(props) {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <input
         type="number"
         className="form-control"
-        placeholder={placeholder}
-        id={id}
-        value={value}
-        onChange={onChange}
+        placeholder={props.placeholder}
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange}
       />
      
      </>

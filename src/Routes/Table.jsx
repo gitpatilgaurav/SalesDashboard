@@ -82,7 +82,13 @@ export default function Table() {
       setPage(newPage);
     }
   };
+ 
 
+
+  // function handler(event){
+  //   let val = event.target.data.value;
+  //   setPage(val);
+  // }
   function handleNextPage() {
     handlePageChange(page + 1);
   }
@@ -139,6 +145,7 @@ export default function Table() {
                   onClick={onPageNumber(startPage + i)}
                   className={page === startPage + i ? "active" : ""}
                 >
+                 
                   {startPage + i}
                 </span>
               ))}

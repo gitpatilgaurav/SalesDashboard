@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function DateInput({ label, id, value, onChange }) {
+export default function DateInput(props) {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <input
         type="date"
         className="form-control"
-        id={id}
-        value={value}
-        onChange={onChange}
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange}
       />
     </>
   );

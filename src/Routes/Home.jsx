@@ -81,7 +81,6 @@ export default function Home() {
             onYearChange={handleYearChange}
             onMonthChange={handleMonthChange}
           />
-          
         </div>
         
         <div className="charts">

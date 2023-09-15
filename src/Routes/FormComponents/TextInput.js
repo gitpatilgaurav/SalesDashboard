@@ -1,16 +1,16 @@
 import React from "react";
 
-export default function TextInput({ label, id, placeholder, value, onChange }) {
+export default function TextInput(props) {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <input
         type="text"
         className="form-control"
-        placeholder={placeholder}
-        id={id}
-        value={value}
-        onChange={onChange}
+        placeholder={props.placeholder}
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange}
       />
     </>
   );
