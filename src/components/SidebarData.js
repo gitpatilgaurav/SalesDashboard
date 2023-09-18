@@ -30,7 +30,7 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Edit Entries",
+    title: "Add Entries",
     path: "/form",
     icon: <FaIcons.FaWpforms />,
     cName: "nav-text",

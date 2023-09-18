@@ -16,7 +16,7 @@ import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
     const averageAge = totalAge / countryData.length;
     return { country, averageAge };
       });
-      console.log(countryAverages);
+      // console.log(countryAverages);
        
  
     useLayoutEffect(() => {

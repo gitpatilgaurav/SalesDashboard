@@ -6,7 +6,7 @@ import SelectInput from "./FormComponents/SelectInput";
 import SuccessMessage from "./FormComponents/SuccessMessage";
 import ResetForm from "./FormComponents/ResetForm";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 export default function Form(props) {
   const apiData = useSelector((state) => state.ApiReducer);
@@ -42,7 +42,7 @@ export default function Form(props) {
       return { value: inputValue, error: null };
     }
     return {
-      error: "Only alphabets and spaces are allowed",
+      error: "Only alphabets are allowed",
     };
   };
 
@@ -52,7 +52,7 @@ export default function Form(props) {
       return { value: numericValue, error: null };
     }
     return {
-      error: "Please enter a valid positive number.",
+      error: "Please enter a valid number",
     };
   };
 
@@ -120,9 +120,18 @@ export default function Form(props) {
 
   function onAgeChange(event) {
     const { value, error } = validateNumericInput(event.target.value);
-    setAge(value);
-    setAgeError(error);
+  
+    
+    if (value <=85) {
+      setAge(value);
+      setAgeError(error);
+    } else {
+      setAgeError("Age must less than 85");
+      setAge(null)
+     
+    }
   }
+  
 
   function onGenderChange(event) {
     const { value } = event.target;
@@ -264,7 +273,7 @@ export default function Form(props) {
         unit_price,
         cost: unit_price * quantity,
         revenue: unit_cost * quantity,
-        id: uuidv4(),
+        id: index+1,
       };
       console.log(formData);
       try {
@@ -277,7 +286,7 @@ export default function Form(props) {
         });
         if (response.ok) {
           props.getdata();
-          console.log("Data submitted successfully.");
+          console.log("Data submitted successfully");
           setProductCategory("");
           setSubCategory("");
           setUnitPrice("");

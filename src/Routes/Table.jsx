@@ -83,8 +83,6 @@ export default function Table() {
     }
   };
  
-
-
   // function handler(event){
   //   let val = event.target.data.value;
   //   setPage(val);
@@ -96,7 +94,6 @@ export default function Table() {
   function handlePrevPage() {
     handlePageChange(page - 1);
   }
-
 
   const startPage = Math.max(1, page - Math.floor(pagesToShow / 2));
   const endPage = Math.min(totalPages, startPage + pagesToShow - 1);
@@ -138,7 +135,7 @@ export default function Table() {
               {Array.from({ length: endPage - startPage + 1 }, (index, i) => (
                 <span 
                   key={i}
-                  onClick={handlePageChange.bind(null, startPage + i)}
+                  onClick={handlePageChange.bind(index,startPage + i)}
                   className={page === startPage + i ? "active" : ""}
                 >
                   {startPage + i}

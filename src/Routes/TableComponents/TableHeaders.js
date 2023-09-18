@@ -49,7 +49,7 @@ export default function TableHeaders({ onSorting }) {
 
   return (
     <tr>
-      <th onClick={onIDClick}>ID</th>
+      <th onClick={onIDClick}>Sr. No</th>
       <th onClick={onDateClick}>Date</th>
       {/* <th onClick={onYearClick}>Year</th> */}
       <th onClick={onMonthClick}>Month</th>
@@ -64,7 +64,7 @@ export default function TableHeaders({ onSorting }) {
       <th onClick={onUPClick}>Unit Price</th> */}
       <th onClick={onCostClick}>Cost</th>
       <th onClick={onRevenueClick}>Revenue</th>
-      <th onClick={null}>Operation</th>
+      <th>Operation</th>
     </tr>
   );
 }
