@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function CombinedFilter(props) {
+
   return (
     <div className="filters">
       <div className="yearDropdown">
@@ -16,7 +17,7 @@ export default function CombinedFilter(props) {
       <div className="yearDropdown">
         <select onChange={props.onMonthChange} value={props.selectedMonth}>
           <option value="">All Months</option>
-          {props.months.map((month) => (
+          {props.monthOrder.map((month) => (
             <option key={month} value={month}>
               {month}
             </option>

@@ -11,7 +11,7 @@ export default function SelectInput(props) {
         onChange={props.onChange}
       >
         <option value="" disabled>
-          {props.label}
+          {props.placeholder}
         </option>
         {props.options.map((option, index) => (
           <option key={index} value={option}>

@@ -26,12 +26,12 @@ export default function TableRows({ apiData, search, page, itemsPerPage }) {
         {/* <td>{data.year}</td> */}
         <td>{data.month}</td>
         <td>{data.customer_age}</td>
-        <td>{data.customer_gender}</td>
+        {/* <td>{data.customer_gender}</td> */}
         <td>{data.country}</td>
         <td>{data.state}</td>
         <td>{data.product_category}</td>
         <td>{data.sub_category}</td>
-        <td>{data.quantity}</td>
+        {/* <td>{data.quantity}</td> */}
         {/* <td>{data.unit_cost}</td>
         <td>{data.unit_price}</td> */}
         <td>{data.cost}</td>

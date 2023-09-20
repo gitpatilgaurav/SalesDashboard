@@ -6,6 +6,7 @@ import DateInput from "./FormComponents/DateInput";
 import SelectInput from "./FormComponents/SelectInput";
 import SuccessMessage from "./FormComponents/SuccessMessage";
 import ResetForm from "./FormComponents/ResetForm";
+import EditSuccessMessage from './FormComponents/EditSuccessMessage'
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 
@@ -447,7 +448,7 @@ export default function Edit(props) {
         </form>
       </div>
       {showSuccess && (
-        <SuccessMessage
+        <EditSuccessMessage
           formData={submittedData}
           onClosePopup={handleSuccessMessageClose}
         />

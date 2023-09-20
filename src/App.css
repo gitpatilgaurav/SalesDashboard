@@ -45,6 +45,11 @@ td {
   color: white;
 }
 
+th:hover{
+  cursor: pointer;
+
+}
+
 
 table {
   width: 100vw;
@@ -363,8 +368,8 @@ select{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height:100%;
-  padding: 120px;
+  height:100vh;
+  padding: 20px;
  background-color: #1e2742;
   /* overflow: hidden; */
 }
@@ -378,21 +383,7 @@ select{
   width: 100%;
 }
 
-.success {
-  display: flex;
-  position: fixed;
-  top : 0;
-  left : 25%;
-  width: 50%;
-  height: 70%;
-  margin-top: 100px;
-  border: none;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
- background-color: #1e2742;
-}
+
 .custom-submit-button {
  background-color: #4caf50;
   color: #fff;
@@ -401,4 +392,49 @@ select{
   border-radius: 20px;
 }
 
+.treechart{
+  border: 1px solid white;
+  border-radius: 10px;
+  /* width: 700px; */
+  height: 80vh;
+  width: 90vw;
+  overflow: auto;
+  padding: 120px;
+  color: white;
+  font-size: 1rem;
+  background-color: white;
+  /* margin: 20px; */
+  box-shadow: 3px 0px  30px black;
+}
 
+.success {
+  display: flex;
+  position: fixed;
+  top : 0;
+  left : 25%;
+  width: 50%;
+  height: 80%;
+  margin-top: 100px;
+  border: none;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+ background-color: #1e2742;
+}
+
+.success-header{
+  font-size: 1.3em;
+}
+
+.form-data{
+  background-color:  #13192f;
+  border: none;
+  border-radius: 10px;
+}
+
+.success-btn{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}

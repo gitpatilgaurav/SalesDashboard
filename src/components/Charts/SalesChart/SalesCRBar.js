@@ -80,6 +80,10 @@ export default function SalesCrBar({filteredData, monthOrder}) {
     series1.appear(2000);
     series2.appear(2000);
 
+    yAxis.children.moveValue(am5.Label.new(root, { text: "Revenue/Cost in $", rotation: -90, y: am5.p50, centerX: am5.p50 }), 0);
+    // xAxis.children.moveValue(am5.Label.new(root, { text: "Month", rotation: 0, x: am5.p50, centerX: am5.p50 }), 0);
+ 
+
     series1.columns.template.setAll({
       cornerRadiusTL: 5,
       cornerRadiusTR: 5,

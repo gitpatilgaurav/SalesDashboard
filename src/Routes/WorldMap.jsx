@@ -18,7 +18,6 @@ import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
       });
       // console.log(countryAverages);
        
- 
     useLayoutEffect(() => {
  
       let root = am5.Root.new("chartdiv");
@@ -204,6 +203,7 @@ import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
     return ( 
     <div className="map-container">
        <div id="chartdiv" className="worldMap">
-        <h2>What is average age of your customer?</h2>
+        <h3>What is average age of your customer?</h3>
+        <hr />
        </div>
   </div>)};

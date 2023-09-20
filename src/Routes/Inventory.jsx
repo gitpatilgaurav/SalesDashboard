@@ -3,6 +3,7 @@ import _ from "lodash";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import KPI from "./UiComponents/KPI";
 import Chart from "./UiComponents/Charts";
+import Tree from '../components/Charts/InventoryCharts/Tree'
 import ProductPie from '../components/Charts/InventoryCharts/ProductPie'
 import SubProductPie from '../components/Charts/InventoryCharts/SubProductPie'
 
@@ -16,6 +17,7 @@ export default function Inventory() {
   return (
     <div className="home">
     <div className="home-container">
+   
       <div className="kpi">
       <div className="heading">
       <p>Inventory</p>
@@ -25,6 +27,7 @@ export default function Inventory() {
         <KPI title="Total Quantity Sold" value={totalQuantity} />
         <KPI title="Profit Percentage" value={`${profitPercentage}%`} /> */}
       </div>
+     
       <div className="charts">
         <Chart
           title="Where Should We Invest More?"
@@ -34,6 +37,9 @@ export default function Inventory() {
           title="Which Products Brings Most Sales?"
           chartName={<SubProductPie />}
         />
+         {/* <div className="treechart">
+      <Tree/>
+      </div> */}
       </div>
     </div>
   </div>

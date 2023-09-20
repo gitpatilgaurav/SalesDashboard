@@ -69,7 +69,7 @@ export default function Home_Country_Bar({ filteredData }) {
     series.columns.template.setAll({
       tooltipText: "{categoryX}: {valueY}"
     });
-
+    yAxis.children.moveValue(am5.Label.new(root, { text: "Total Sales", rotation: -90, y: am5.p50, centerX: am5.p50 }), 0);
     series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
     series.columns.template.adapters.add("fill", function(fill, target) {
       return chart.get("colors").getIndex(series.columns.indexOf(target));
